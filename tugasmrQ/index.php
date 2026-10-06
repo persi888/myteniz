@@ -120,7 +120,7 @@ Our Courts
 </h3>
 
 <p>
-Premium tennis court dengan
+Premium tennis court    
 fasilitas modern.
 </p>
 
@@ -136,7 +136,7 @@ fasilitas modern.
     LOGIN TO BOOK
 </a>
 
-<?php endif; ?>
+<?php endif; ?>         
 
 </div>
 
