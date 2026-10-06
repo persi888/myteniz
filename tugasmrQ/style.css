@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3ee;
+    color: #0b1220;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* NAVBAR */
+
+nav {
+    background: #0b1220;
+    color: white;
+    padding: 22px 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #c9a96e;
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a:hover {
+    color: #c9a96e;
+}
+
+
+/* HERO */
+
+.hero {
+    background: #0b1220;
+    color: white;
+    padding: 120px 0;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: 65px;
+    line-height: 1;
+}
+
+.hero h1 span {
+    color: #c9a96e;
+}
+
+.hero p {
+    margin: 25px 0;
+    color: #aaa;
+    max-width: 550px;
+}
+
+.btn {
+    display: inline-block;
+    background: #c9a96e;
+    color: #0b1220;
+    padding: 14px 25px;
+    font-weight: bold;
+}
+
+
+/* SECTION */
+
+section {
+    padding: 80px 0;
+}
+
+.title {
+    font-family: Georgia, serif;
+    font-size: 40px;
+    margin-bottom: 35px;
+}
+
+
+/* CARD */
+
+.cards {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border: 1px solid #eee;
+}
+
+.card h3 {
+    font-family: Georgia, serif;
+    margin: 10px 0;
+}
+
+.card p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+
+/* FORM */
+
+.form-box {
+    width: 400px;
+    max-width: 90%;
+    margin: 80px auto;
+    background: white;
+    padding: 35px;
+}
+
+.form-box h1 {
+    font-family: Georgia, serif;
+    margin-bottom: 25px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 18px;
+    border: 1px solid #ddd;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #0b1220;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.error {
+    background: #f3d5d5;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+
+/* DASHBOARD */
+
+.booking {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c9a96e;
+}
+
+.booking a {
+    color: #98783f;
+    font-weight: bold;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #0b1220;
+    color: #aaa;
+    padding: 35px;
+    text-align: center;
+}
+
+
+@media(max-width:700px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .menu {
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+}
