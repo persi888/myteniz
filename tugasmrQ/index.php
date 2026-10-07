@@ -1,19 +1,28 @@
 <?php
+
 include "proses.php";
 
 $cabang = $db->query(
-    "SELECT * FROM cabang"
+    "SELECT * FROM cabang ORDER BY id"
 );
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
 
-<title>MyTeniz</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MyTeniz</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -22,157 +31,184 @@ $cabang = $db->query(
 
 <nav>
 
-<div class="container nav">
+    <div class="container nav">
 
-<a href="index.php" class="logo">
-MY<span>TENIZ</span>
-</a>
+        <a href="index.php" class="logo">
+            MY<span>TENIZ</span>
+        </a>
 
-<div class="menu">
 
-<a href="index.php">
-Home
-</a>
+        <div class="menu">
 
-<a href="#cabang">
-Cabang
-</a>
+            <a href="index.php">
+                Home
+            </a>
 
-<?php if(isset($_SESSION['user_id'])): ?>
+            <a href="#cabang">
+                Cabang
+            </a>
 
-<a href="dashboard.php">
-Booking Saya
-</a>
 
-<a href="proses.php?logout=1">
-Logout
-</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
 
-<?php else: ?>
+                <a href="dashboard.php">
+                    Booking Saya
+                </a>
 
-<a href="login.php">
-Login
-</a>
+                <a href="logout.php">
+                    Logout
+                </a>
 
-<a href="register.php">
-Register
-</a>
+            <?php else: ?>
 
-<?php endif; ?>
+                <a href="login.php">
+                    Login
+                </a>
 
-</div>
+                <a href="register.php">
+                    Register
+                </a>
 
-</div>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
 
 </nav>
 
 
 <section class="hero">
 
-<div class="container">
+    <div class="container">
 
-<p>PREMIUM TENNIS BOOKING</p>
+        <p>
+            PREMIUM TENNIS BOOKING
+        </p>
 
-<h1>
-PLAY YOUR GAME.
-<br>
-<span>YOUR WAY.</span>
-</h1>
+        <h1>
+            PLAY YOUR GAME.
+            <br>
+            <span>YOUR WAY.</span>
+        </h1>
 
-<p>
-Booking lapangan tenis dengan mudah.
-Jika rencana berubah, kamu bisa
-reschedule cabang dan waktu.
-</p>
+        <p>
+            Booking lapangan tenis dengan mudah.
+            Jika rencana berubah, kamu bisa
+            reschedule cabang dan waktu.
+        </p>
 
-<a
-href="booking.php"
-class="btn"
->
-BOOK A COURT
-</a>
 
-</div>
+        <?php if (isset($_SESSION['user_id'])): ?>
+
+            <a
+                href="booking.php"
+                class="btn"
+            >
+                BOOK A COURT
+            </a>
+
+        <?php else: ?>
+
+            <a
+                href="login.php"
+                class="btn"
+            >
+                LOGIN TO BOOK
+            </a>
+
+        <?php endif; ?>
+
+    </div>
 
 </section>
 
 
 <section id="cabang">
 
-<div class="container">
+    <div class="container">
 
-<h2 class="title">
-Our Courts
-</h2>
+        <h2 class="title">
+            Our Courts
+        </h2>
 
-<div class="cards">
 
-<?php while($c = $cabang->fetch_assoc()): ?>
+        <div class="cards">
 
-<div class="card">
+            <?php while ($c = $cabang->fetch_assoc()): ?>
 
-<p>
-<?= $c['lokasi'] ?>
-</p>
+                <div class="card">
 
-<h3>
-<?= $c['nama'] ?>
-</h3>
+                    <p>
+                        <?= htmlspecialchars($c['lokasi']) ?>
+                    </p>
 
-<p>
-Premium tennis court    
-fasilitas modern.
-</p>
+                    <h3>
+                        <?= htmlspecialchars($c['nama']) ?>
+                    </h3>
 
-<?php if (isset($_SESSION['user_id'])): ?>
+                    <p>
+                        Premium tennis court dengan
+                        fasilitas modern.
+                    </p>
 
-<a href="booking.php" class="btn">
-    BOOK A COURT
-</a>
 
-<?php else: ?>
+                    <?php if (isset($_SESSION['user_id'])): ?>
 
-<a href="login.php" class="btn">
-    LOGIN TO BOOK
-</a>
+                        <a
+                            href="booking.php?cabang=<?= $c['id'] ?>"
+                            class="btn"
+                        >
+                            BOOK NOW
+                        </a>
 
-<?php endif; ?>         
+                    <?php else: ?>
 
-</div>
+                        <a
+                            href="login.php"
+                            class="btn"
+                        >
+                            LOGIN TO BOOK
+                        </a>
 
-<?php endwhile; ?>
+                    <?php endif; ?>
 
-</div>
+                </div>
 
-</div>
+            <?php endwhile; ?>
+
+        </div>
+
+    </div>
 
 </section>
 
 
 <section>
 
-<div class="container">
+    <div class="container">
 
-<h2 class="title">
-Flexible Booking
-</h2>
+        <h2 class="title">
+            Flexible Booking
+        </h2>
 
-<p>
-Rencana berubah? Tidak masalah.
-MyTeniz memungkinkan kamu mengubah
-lapangan, tanggal, dan waktu booking.
-</p>
+        <p>
+            Rencana berubah? Tidak masalah.
+            MyTeniz memungkinkan kamu mengubah
+            lapangan, tanggal, dan waktu booking.
+        </p>
 
-</div>
+    </div>
 
 </section>
 
 
 <footer>
 
-MYTENIZ © 2026
+    MYTENIZ © 2026
 
 </footer>
+
 
 </body>
 

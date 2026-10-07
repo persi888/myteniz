@@ -1,11 +1,25 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$db = new mysqli("localhost", "root", "", "myteniz");
+
+$db = new mysqli(
+    "localhost",
+    "root",
+    "",
+    "myteniz"
+);
+
 
 if ($db->connect_error) {
-    die("Koneksi database gagal");
+
+    die(
+        "Koneksi database gagal: "
+        . $db->connect_error
+    );
+
 }
 
 
@@ -20,23 +34,35 @@ if (isset($_POST['register'])) {
         PASSWORD_DEFAULT
     );
 
+
     $cek = $db->query(
-        "SELECT * FROM users WHERE email='$email'"
+        "SELECT *
+         FROM users
+         WHERE email='$email'"
     );
 
+
     if ($cek->num_rows > 0) {
-        header("Location: register.php?error=Email sudah digunakan");
+
+        header(
+            "Location: register.php?error=Email sudah digunakan"
+        );
+
         exit;
     }
+
 
     $db->query("
         INSERT INTO users
         (nama, email, password)
+
         VALUES
         ('$nama', '$email', '$password')
     ");
 
+
     header("Location: login.php");
+
     exit;
 }
 
@@ -48,25 +74,39 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+
     $data = $db->query("
         SELECT *
         FROM users
         WHERE email='$email'
     ");
 
+
     $user = $data->fetch_assoc();
+
 
     if (
         $user &&
-        password_verify($password, $user['password'])
+        password_verify(
+            $password,
+            $user['password']
+        )
     ) {
 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['nama'] = $user['nama'];
+        $_SESSION['user_id'] =
+            $user['id'];
 
-        header("Location: dashboard.php");
+        $_SESSION['nama'] =
+            $user['nama'];
+
+
+        header(
+            "Location: dashboard.php"
+        );
+
         exit;
     }
+
 
     header(
         "Location: login.php?error=Email atau password salah"
@@ -80,24 +120,43 @@ if (isset($_POST['login'])) {
 
 if (isset($_POST['booking'])) {
 
+
     if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
+
+        header(
+            "Location: login.php"
+        );
+
         exit;
     }
 
-    $user = $_SESSION['user_id'];
-    $lapangan = $_POST['lapangan'];
-    $tanggal = $_POST['tanggal'];
-    $jam = $_POST['jam'];
+
+    $user =
+        $_SESSION['user_id'];
+
+    $lapangan =
+        $_POST['lapangan'];
+
+    $tanggal =
+        $_POST['tanggal'];
+
+    $jam =
+        $_POST['jam'];
+
 
     $cek = $db->query("
         SELECT *
         FROM booking
+
         WHERE lapangan_id='$lapangan'
+
         AND tanggal='$tanggal'
+
         AND jam='$jam'
+
         AND status='Berhasil'
     ");
+
 
     if ($cek->num_rows > 0) {
 
@@ -108,14 +167,32 @@ if (isset($_POST['booking'])) {
         exit;
     }
 
+
     $db->query("
         INSERT INTO booking
-        (user_id, lapangan_id, tanggal, jam, status)
+        (
+            user_id,
+            lapangan_id,
+            tanggal,
+            jam,
+            status
+        )
+
         VALUES
-        ('$user', '$lapangan', '$tanggal', '$jam', 'Berhasil')
+        (
+            '$user',
+            '$lapangan',
+            '$tanggal',
+            '$jam',
+            'Berhasil'
+        )
     ");
 
-    header("Location: dashboard.php");
+
+    header(
+        "Location: dashboard.php"
+    );
+
     exit;
 }
 
@@ -124,27 +201,48 @@ if (isset($_POST['booking'])) {
 
 if (isset($_POST['reschedule'])) {
 
+
     if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
+
+        header(
+            "Location: login.php"
+        );
+
         exit;
     }
 
-    $id = $_POST['id'];
-    $lapangan = $_POST['lapangan'];
-    $tanggal = $_POST['tanggal'];
-    $jam = $_POST['jam'];
 
-    $user = $_SESSION['user_id'];
+    $id =
+        $_POST['id'];
+
+    $lapangan =
+        $_POST['lapangan'];
+
+    $tanggal =
+        $_POST['tanggal'];
+
+    $jam =
+        $_POST['jam'];
+
+    $user =
+        $_SESSION['user_id'];
+
 
     $cek = $db->query("
         SELECT *
         FROM booking
+
         WHERE lapangan_id='$lapangan'
+
         AND tanggal='$tanggal'
+
         AND jam='$jam'
+
         AND status='Berhasil'
+
         AND id != '$id'
     ");
+
 
     if ($cek->num_rows > 0) {
 
@@ -155,19 +253,25 @@ if (isset($_POST['reschedule'])) {
         exit;
     }
 
+
     $db->query("
         UPDATE booking
 
         SET
-        lapangan_id='$lapangan',
-        tanggal='$tanggal',
-        jam='$jam'
+            lapangan_id='$lapangan',
+            tanggal='$tanggal',
+            jam='$jam'
 
         WHERE id='$id'
+
         AND user_id='$user'
     ");
 
-    header("Location: dashboard.php");
+
+    header(
+        "Location: dashboard.php"
+    );
+
     exit;
 }
 

@@ -1,75 +1,92 @@
-<?php
-include "proses.php";
-?>
-
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
 
-<title>Login - MyTeniz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>Login - MyTeniz</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<nav>
+
+    <div class="container nav">
+
+        <a href="index.html" class="logo">
+            MY<span>TENIZ</span>
+        </a>
+
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+        </div>
+
+    </div>
+
+</nav>
+
+
 <div class="form-box">
 
-<a href="index.php" class="logo">
-MY<span>TENIZ</span>
-</a>
+    <h1>
+        Welcome Back
+    </h1>
 
-<h1>
-Welcome Back
-</h1>
+    <p>
+        Login untuk melakukan booking lapangan.
+    </p>
+
+    <div id="error" class="error"></div>
+
+    <form id="loginForm">
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            required
+            placeholder="Masukkan email"
+        >
 
 
-<?php if(isset($_GET['error'])): ?>
+        <label>
+            Password
+        </label>
 
-<div class="error">
-<?= $_GET['error'] ?>
+        <input
+            type="password"
+            id="password"
+            required
+            placeholder="Masukkan password"
+        >
+
+
+        <button type="submit">
+            LOGIN
+        </button>
+
+    </form>
+
+
+    <p class="form-footer">
+        Belum punya akun?
+        <a href="register.html">
+            Register
+        </a>
+    </p>
+
 </div>
 
-<?php endif; ?>
 
-
-<form
-action="proses.php"
-method="POST"
->
-
-<input
-type="email"
-name="email"
-placeholder="Email"
-required
->
-
-<input
-type="password"
-name="password"
-placeholder="Password"
-required
->
-
-<button name="login">
-LOGIN
-</button>
-
-</form>
-
-
-<p>
-Belum punya akun?
-<a href="register.php">
-Register
-</a>
-</p>
-
-</div>
+<script src="script.js"></script>
 
 </body>
-
 </html>

@@ -1,81 +1,104 @@
-<?php
-include "proses.php";
-?>
-
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
 
-<title>Register - MyTeniz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>Register - MyTeniz</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<nav>
+
+    <div class="container nav">
+
+        <a href="index.html" class="logo">
+            MY<span>TENIZ</span>
+        </a>
+
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+
+</nav>
+
+
 <div class="form-box">
 
-<a href="index.php" class="logo">
-MY<span>TENIZ</span>
-</a>
+    <h1>
+        Create Account
+    </h1>
 
-<h1>
-Create Account
-</h1>
+    <p>
+        Buat akun MyTeniz untuk mulai bermain.
+    </p>
 
-<?php if(isset($_GET['error'])): ?>
+    <div id="error" class="error"></div>
 
-<div class="error">
-<?= $_GET['error'] ?>
+    <form id="registerForm">
+
+        <label>
+            Nama
+        </label>
+
+        <input
+            type="text"
+            id="nama"
+            required
+            placeholder="Nama lengkap"
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            required
+            placeholder="Email"
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            required
+            placeholder="Password"
+        >
+
+
+        <button type="submit">
+            REGISTER
+        </button>
+
+    </form>
+
+
+    <p class="form-footer">
+        Sudah punya akun?
+        <a href="login.html">
+            Login
+        </a>
+    </p>
+
 </div>
 
-<?php endif; ?>
 
-
-<form
-action="proses.php"
-method="POST"
->
-
-<input
-type="text"
-name="nama"
-placeholder="Nama lengkap"
-required
->
-
-<input
-type="email"
-name="email"
-placeholder="Email"
-required
->
-
-<input
-type="password"
-name="password"
-placeholder="Password"
-required
->
-
-<button name="register">
-REGISTER
-</button>
-
-</form>
-
-
-<p>
-Sudah punya akun?
-<a href="login.php">
-Login
-</a>
-</p>
-
-</div>
+<script src="script.js"></script>
 
 </body>
-
 </html>
