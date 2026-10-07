@@ -1,92 +1,64 @@
+<?php
+session_start();
+$error = $_GET['error'] ?? '';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Login - MyTeniz</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <nav>
-
     <div class="container nav">
-
-        <a href="index.html" class="logo">
+        <a href="index.php" class="logo">
             MY<span>TENIZ</span>
         </a>
-
         <div class="menu">
-            <a href="index.html">Home</a>
-            <a href="register.html">Register</a>
+            <a href="index.php">Home</a>
+            <a href="register.php">Register</a>
         </div>
-
     </div>
-
 </nav>
 
+<section>
+    <div class="container">
+        <!-- Mengubah .card menjadi .form-box agar rapi sesuai CSS baru -->
+        <div class="form-box">
+            <h1 class="title">Login</h1>
+            <p>Masuk ke akun MyTeniz kamu.</p>
 
-<div class="form-box">
+            <?php if ($error): ?>
+                <div class="error">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
 
-    <h1>
-        Welcome Back
-    </h1>
+            <form action="proses.php" method="POST">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Masukkan email" required>
 
-    <p>
-        Login untuk melakukan booking lapangan.
-    </p>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Masukkan password" required>
 
-    <div id="error" class="error"></div>
+                <button type="submit" name="login" class="btn">LOGIN</button>
+            </form>
 
-    <form id="loginForm">
+            <p style="margin-top: 20px; text-align: center;">
+                Belum punya akun? <a href="register.php" style="color:#FF4C29; font-weight:bold;">Register</a>
+            </p>
+        </div>
+    </div>
+</section>
 
-        <label>
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="email"
-            required
-            placeholder="Masukkan email"
-        >
-
-
-        <label>
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="password"
-            required
-            placeholder="Masukkan password"
-        >
-
-
-        <button type="submit">
-            LOGIN
-        </button>
-
-    </form>
-
-
-    <p class="form-footer">
-        Belum punya akun?
-        <a href="register.html">
-            Register
-        </a>
-    </p>
-
-</div>
-
-
-<script src="script.js"></script>
+<footer>
+    MYTENIZ © 2026
+</footer>
 
 </body>
 </html>
